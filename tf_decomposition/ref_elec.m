@@ -32,22 +32,6 @@ if strcmp (montage, 'bipo');
             chan2useList{i} = [EEG.chanlocs(i).labels EEG.chanlocs(i+1).labels];
             data = dataC2 - dataC1;
             EEG.data(i,:) = data;%% extract interval between events in the logs
-        else
-            if (i>2) 
-                chan2useList{i-1} = [];
-                EEG.data(i-1,:,:) = EEG.data(i-2,:,:) - EEG.data(i-1,:,:);
-                idx(count) = i-1;
-                count = count+1;
-            end
-            chan2use  = EEG.chanlocs(i).labels;
-            currentLetter = chan2use(1);
-            dataC1 =  squeeze(EEG.data(strcmpi(EEG.chanlocs(i).labels,{EEG.chanlocs.labels}), :,:));
-            chan2use  = EEG.chanlocs(i+1).labels;
-            nextLetter = chan2use(1);
-            dataC2 =  squeeze(EEG.data( strcmpi(EEG.chanlocs(i+1).labels,{EEG.chanlocs.labels}), :,:));
-            chan2useList{i} = [EEG.chanlocs(i).labels EEG.chanlocs(i+1).labels];
-            data = dataC2 - dataC1;
-            EEG.data(i,:) = data;%% extract interval between events in the logs
         end 
     end
 
