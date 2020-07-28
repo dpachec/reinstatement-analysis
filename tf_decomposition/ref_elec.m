@@ -1,4 +1,3 @@
-
 function [EEG] = ref_elec(EEG, montage)
 
 disp ('>>>>> re-referencing...');
@@ -54,7 +53,7 @@ if strcmp (montage, 'bipo');
 
 disp (' >>>> bipolar reference all electrodes');
 chan2useList = chan2useList';
-    
+
 end
 
 if strcmp (montage, 'mono');
@@ -65,4 +64,3 @@ end
 
 
 re_reference = EEG;
-%%end function

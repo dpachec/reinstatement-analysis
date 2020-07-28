@@ -1,13 +1,45 @@
-%% LOAD DATA (N = 11)
+%% LOAD DATA (~6 min for 11 subjects)
+clear, close all; 
+disp(string(datetime));
 
-load ('ALLEEG')
+%global parameters % no ; for log
+cfg                 =       [];
+cfg.only1subj       =       0;   % take only first subject
+cfg.align2resp      =       0;   % 0 = align2onset
+cfg.nIQR            =       0;   % IQR. 0 = define specifically for each subject within script
+cfg.plotTrajEvents  =       0;
+
+disp (['align2resp = ' num2str(cfg.align2resp) newline 'nIQR = ' num2str(cfg.nIQR) ]); 
+
+[ALLEEG allR] = load_all_data_R (cfg);
+
+%%If the data is stored in an ALLEEG file containing all subjects :
+% load ('ALLEEG')
+
+%% 
+for si = 1:length(ALLEEG)
+
+EEG = ALLEEG{si};    
+subj = EEG.subject;
+
+% re-reference the data 
+montage = 'bipo'; % 'aver', 'bipo'
+EEG = ref_elec(EEG, montage); % EEG
+
+ALLEEG{si} = EEG;
+end
 
 %% PROCESS DATA 
+clearvars -except ALLEEG 
 
 for si = 1:length(ALLEEG)
 
 EEG = ALLEEG{si};    
 subj = EEG.subject;
+
+% re-reference the data 
+montage = 'bipo'; % 'aver', 'bipo'
+EEG = ref_elec(EEG, montage); % EEG
 
 %epoch data into a list of all trials for selected channels
 eLim = [-6 6];

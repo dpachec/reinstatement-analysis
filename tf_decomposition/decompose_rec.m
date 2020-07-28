@@ -58,7 +58,7 @@ size(dataL)
 
 cfg              = [];
 cfg.method       = 'wavelet'; %'mtmconvol'; % 'wavelet'; %
-cfg.width        = linspace(6, 12, 15); 
+cfg.width        = linspace(6, 12, 19); %linspace(6, 12, 19); 
 cfg.output       = 'pow';
 cfg.foi          = [30:5:100];   
 if strcmp (timeRes, 'all')
