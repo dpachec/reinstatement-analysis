@@ -1,5 +1,0 @@
-
-
-%% run on all2all file
-
-results = rsa_m(all2all, 500, 100, [1:44], 0)
